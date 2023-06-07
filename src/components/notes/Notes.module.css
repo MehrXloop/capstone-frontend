@@ -1,8 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: rgb(160, 212, 212);
+  font-family: 'Inter', sans-serif;
+}
+.heading{
+  margin: 1% 0;
+}
+.main{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
 }
 .textareaWrapper {
   display: flex;
@@ -24,16 +35,16 @@
 }
 .btnSave {
   background-color: white;
-  padding:.5em 1em;
+  padding: 0.5em 1em;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: none;
   border-radius: 15px;
   margin: 1vw;
   cursor: pointer;
   font-size: 1em;
+  border: 1px solid white;
 }
 .btnSave:hover {
   border: 1px solid rgba(0, 128, 128, 1);
@@ -44,14 +55,40 @@
 .saveIcon {
   background-color: white;
 }
-
+.costWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.costWrapper h5 {
+  font-weight: 600;
+  font-size: 1.3em;
+  padding-right: 10px;
+ 
+}
+.costBox {
+  width: 10vw;
+  height: 7vh;
+  background-color: white;
+  align-items: center;
+  border-radius: 15px;
+  font-size: 1.3em;
+  text-align: center;
+  border: none;
+  outline: none;
+}
+.btnDiv{
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-    .textarea {
-      width: 60vw;
-      height: 40vh;
-      border-radius: 3vw;
-      padding: 2vw;
-    }
+  .textarea {
+    width: 60vw;
+    height: 40vh;
+    border-radius: 3vw;
+    padding: 2vw;
+  }
 }

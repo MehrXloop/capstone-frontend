@@ -38,7 +38,7 @@ function Notes() {
     console.log(newNote)
   }
   return (
-    <div>
+    <section className={NotesCss.main}>
       <h1 className={NotesCss.heading}>Notes</h1>
       <div className={NotesCss.textareaWrapper}>
         <textarea
@@ -48,9 +48,16 @@ function Notes() {
           onChange={event => setContent(event.target.value)}
           placeholder="create a note for patient"
         />
-      <button className={NotesCss.btnSave} onClick={handleSave}><CheckBoxRoundedIcon className={NotesCss.saveIcon} /><span>Save</span> </button>
+        <div className={NotesCss.btnDiv}>
+
+          <button className={NotesCss.btnSave} onClick={handleSave}><CheckBoxRoundedIcon className={NotesCss.saveIcon} /><span>Save</span> </button>
+        </div>
       </div>
-    </div>
+      <div className={NotesCss.costWrapper}>
+        <h5>Cost: </h5>
+        <input type='text' value="300$" readOnly className={NotesCss.costBox}></input>
+      </div>
+    </section>
   )
 }
 
