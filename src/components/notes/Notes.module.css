@@ -1,0 +1,57 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: rgb(160, 212, 212);
+}
+.textareaWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.textarea {
+  border-radius: 30px;
+  border: 1px solid rgba(0, 128, 128, 1);
+  background-color: white;
+  height: 40vh;
+  /* height: 300px; */
+  /* width: 600px; */
+  width: 50vw;
+  padding: 3vw;
+  outline: none;
+  font-size: 1.3em;
+}
+.btnSave {
+  background-color: white;
+  padding:.5em 1em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 15px;
+  margin: 1vw;
+  cursor: pointer;
+  font-size: 1em;
+}
+.btnSave:hover {
+  border: 1px solid rgba(0, 128, 128, 1);
+}
+.btnSave span {
+  background-color: white;
+}
+.saveIcon {
+  background-color: white;
+}
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .textarea {
+      width: 60vw;
+      height: 40vh;
+      border-radius: 3vw;
+      padding: 2vw;
+    }
+}
