@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
-import NotesCss from './Notes.module.css'
+// import NotesCss from './Notes.module.css'
 import CheckBoxRoundedIcon from '@mui/icons-material/CheckBoxRounded';
+import { Box, Typography, TextareaAutosize, Button, TextField } from '@mui/material'
+
+// import { TextareaAutosize } from '@mui/base';
 
 function Notes() {
   const [content, setContent] = useState('');
@@ -38,26 +41,80 @@ function Notes() {
     console.log(newNote)
   }
   return (
-    <section className={NotesCss.main}>
-      <h1 className={NotesCss.heading}>Notes</h1>
-      <div className={NotesCss.textareaWrapper}>
-        <textarea
-          className={NotesCss.textarea}
+    <Box display="flex" flexDirection="column" width='100' alignItems='center'>
+      <Typography variant='h4' sx={{ my: '1%', fontWeight: "bold" }}>Notes</Typography>
+      <Box display="flex" flexDirection="column" alignItems='center' justifyContent='center'>
+        <TextareaAutosize
+          style={{
+            backgroundColor: "white",
+            height: "20vh",
+            width: "40vw",
+            padding: "2vw",
+            outline: "none",
+            fontSize: "1.3em",
+            borderRadius: "30px",
+            border: '1px solid rgba(0, 128, 128, 1)'
+          }}
           type="text"
           value={content}
           onChange={event => setContent(event.target.value)}
           placeholder="create a note for patient"
         />
-        <div className={NotesCss.btnDiv}>
+        <Box display="flex" justifyContent="flex-end" width="100%">
+          <Button
+            variant='outlined'
+            onClick={handleSave}
+            sx={{
+              backgroundColor: "white",
+              color: 'black',
+              fontSize: '1em',
+              border: '1px solid white',
+              padding: '0.5em 1em',
+              borderRadius: '15px',
+              m: 1,
+              '&:hover': {
+                border: '1px solid rgba(0, 128, 128, 1)',
+                backgroundColor: "white",
 
-          <button className={NotesCss.btnSave} onClick={handleSave}><CheckBoxRoundedIcon className={NotesCss.saveIcon} /><span>Save</span> </button>
-        </div>
-      </div>
-      <div className={NotesCss.costWrapper}>
-        <h5>Cost: </h5>
-        <input type='text' value="300$" readOnly className={NotesCss.costBox}></input>
-      </div>
-    </section>
+              },
+            }}><CheckBoxRoundedIcon /> Save</Button>
+        </Box>
+      </Box>
+      {/* cost area */}
+      <Box display="flex" alignItems='center' justifyContent='center'>
+        <Typography variant='h6' sx={{ mr: '2%', fontWeight: "bold" }}>Cost:</Typography>
+        <TextField
+          type="text"
+          value="300$"
+          InputProps={{
+            readOnly: true,
+            sx: {
+              width: "15vw",
+              height: "8vh",
+              backgroundColor: "white",
+              borderRadius: '15px',
+              fontSize: '1.3em',
+              textAlign: 'center',
+              // border: '1px solid white',
+              // outline: 'none',
+              m: 1,
+              '& .MuiOutlinedInput-notchedOutline': {
+                border: 'none',
+                outline: 'none',
+              },
+              '&:hover .MuiOutlinedInput-notchedOutline': {
+                border: 'none',
+                outline: 'none',
+              },
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                border: 'none',
+                outline: 'none',
+              },
+            },
+          }}
+        />
+      </Box>
+    </Box>
   )
 }
 
