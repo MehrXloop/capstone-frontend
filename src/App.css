@@ -1,3 +1,9 @@
 body{
+  background-color: #a0d4d4;
+}
+.App{
+  margin-top: 1%;
   background-color:#a0d4d4 ;
+  display: flex;
+  justify-content: space-evenly;
 }

@@ -9,18 +9,18 @@ function Notes() {
   const [content, setContent] = useState('');
 
   function handleSave() {
-    // const currentDate = new Date().toISOString();
+    const currentDate = new Date().toISOString();
 
     const newNote = {
       // id: 1,
       appointment_id: 2,
-      patient_id: 2,
-      // created: currentDate,
-      // updated: currentDate,
+      patientId: 2,
+      created: currentDate,
+      updated: currentDate,
       content: content,
 
     }
-    fetch('http://localhost:8086/notes/add', {
+    fetch('http://localhost:8080/notes/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -41,7 +41,7 @@ function Notes() {
     console.log(newNote)
   }
   return (
-    <Box display="flex" flexDirection="column" width='100' alignItems='center'>
+    <Box display="flex" flexDirection="column"  alignItems='center'>
       <Typography variant='h4' sx={{ my: '1%', fontWeight: "bold" }}>Notes</Typography>
       <Box display="flex" flexDirection="column" alignItems='center' justifyContent='center'>
         <TextareaAutosize
