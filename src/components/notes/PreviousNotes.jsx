@@ -13,7 +13,7 @@ const PreviousNotes = () => {
 
     const fetchNotes = async () => {
         try {
-            const response = await fetch("http://localhost:8080/notes/notesByPatientId/2");
+            const response = await fetch("http://notes.us-west-2.elasticbeanstalk.com/notes/notesByPatientId/2");
             const data = await response.json();
             setNotes(data);
         } catch (error) {

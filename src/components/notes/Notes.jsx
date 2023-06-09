@@ -11,6 +11,7 @@ function Notes() {
   function handleSave() {
     const currentDate = new Date().toISOString();
 
+    console.log(currentDate);
     const newNote = {
       // id: 1,
       appointment_id: 2,
@@ -20,7 +21,7 @@ function Notes() {
       content: content,
 
     }
-    fetch('http://localhost:8080/notes/add', {
+    fetch('http://notes.us-west-2.elasticbeanstalk.com/notes/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
