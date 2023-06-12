@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, List, ListItem, ListItemText, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-
+import moment from 'moment';
 const PreviousNotes = () => {
     const [notes, setNotes] = useState([]);
     const [selectedNote, setSelectedNote] = useState(null);
@@ -13,12 +13,24 @@ const PreviousNotes = () => {
 
     const fetchNotes = async () => {
         try {
-            const response = await fetch("http://notes.us-west-2.elasticbeanstalk.com/notes/notesByPatientId/2");
+            const response = await fetch("http://localhost:8086/notes/notesByPatientId/2");
             const data = await response.json();
+            console.log(data)
             setNotes(data);
         } catch (error) {
             console.error('Error fetching notes:', error);
         }
+    };
+
+    const formatDateTime = (dateTime) => {
+        const formattedDate = moment.utc(dateTime).format('MMMM Do YYYY');
+        const formattedTime = moment.utc(dateTime).format('h:mm A');
+        const dayOfWeek = moment.utc(dateTime).format('dddd');
+        return {
+            date: formattedDate,
+            time: formattedTime,
+            day: dayOfWeek,
+        };
     };
 
     const openModal = (note) => {
@@ -41,18 +53,26 @@ const PreviousNotes = () => {
                 m: 2
             }}>
                 <Typography variant='h5'>Patient previous Notes:</Typography>
-                {notes.map((note) => (
-                    <ListItem button key={note.id} onClick={() => openModal(note)} sx={{
-                        bgcolor: "#a0d4d4",
-                        borderRadius: "15px",
-                        my: 2
-                    }}>
-                        <ListItemText
-                            primary={`Date: ${note.created}`}
-                            secondary={`Friday 6:00PM`}
-                        />
-                    </ListItem>
-                ))}
+                {notes.map((note) => {
+                    const { date, time, day } = formatDateTime(note.created); // Destructure the values from formatDateTime
+                    return (
+                        <ListItem
+                            button
+                            key={note.id}
+                            onClick={() => openModal(note)}
+                            sx={{
+                                bgcolor: "#a0d4d4",
+                                borderRadius: "15px",
+                                my: 2
+                            }}
+                        >
+                            <ListItemText
+                                primary={`Date: ${formatDateTime(note.created).date}`} // Display formatted date
+                                secondary={`${formatDateTime(note.created).day}, ${time}`} // Display formatted day and time
+                            />
+                        </ListItem>
+                    );
+                })}
             </List>
             <Modal open={modalOpen} onClose={closeModal}>
                 <Box display="flex" flexDirection="column" justifyContent="center" alignItems="flex-start"
@@ -73,7 +93,7 @@ const PreviousNotes = () => {
                                 sx={{
                                     marginLeft: "12px"
                                 }}
-                            >Date: {selectedNote.created}</Typography>
+                            >Date: {formatDateTime(selectedNote.created).date}</Typography>
                             <Typography variant='body1'
                                 sx={{
                                     marginLeft: "12px"

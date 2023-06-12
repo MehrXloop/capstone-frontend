@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-// import NotesCss from './Notes.module.css'
 import CheckBoxRoundedIcon from '@mui/icons-material/CheckBoxRounded';
 import { Box, Typography, TextareaAutosize, Button, TextField } from '@mui/material'
+import moment from 'moment';
 
 // import { TextareaAutosize } from '@mui/base';
 
@@ -9,8 +9,7 @@ function Notes() {
   const [content, setContent] = useState('');
 
   function handleSave() {
-    const currentDate = new Date().toISOString();
-
+    const currentDate = moment().utc();
     console.log(currentDate);
     const newNote = {
       // id: 1,
@@ -39,7 +38,6 @@ function Notes() {
       .catch(error => {
         console.error('Error saving note:', error);
       });
-    console.log(newNote)
   }
   return (
     <Box display="flex" flexDirection="column"  alignItems='center'>
