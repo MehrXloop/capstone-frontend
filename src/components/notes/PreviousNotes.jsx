@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Button, List, ListItem, ListItemText, Typography } from '@mui/material';
+import { Modal, Button, List, ListItem, ListItemText, Typography, TextareaAutosize } from '@mui/material';
 import { Box } from '@mui/system';
 import moment from 'moment';
 const PreviousNotes = () => {
@@ -9,11 +9,11 @@ const PreviousNotes = () => {
 
     useEffect(() => {
         fetchNotes();
-    }, []);
+    }, [notes]);
 
     const fetchNotes = async () => {
         try {
-            const response = await fetch("http://localhost:8086/notes/notesByPatientId/2");
+            const response = await fetch("http://notes.us-west-2.elasticbeanstalk.com/notes/notesByPatientId/2");
             const data = await response.json();
             console.log(data)
             setNotes(data);
@@ -53,26 +53,28 @@ const PreviousNotes = () => {
                 m: 2
             }}>
                 <Typography variant='h5'>Patient previous Notes:</Typography>
-                {notes.map((note) => {
-                    const { date, time, day } = formatDateTime(note.created); // Destructure the values from formatDateTime
-                    return (
-                        <ListItem
-                            button
-                            key={note.id}
-                            onClick={() => openModal(note)}
-                            sx={{
-                                bgcolor: "#a0d4d4",
-                                borderRadius: "15px",
-                                my: 2
-                            }}
-                        >
-                            <ListItemText
-                                primary={`Date: ${formatDateTime(note.created).date}`} // Display formatted date
-                                secondary={`${formatDateTime(note.created).day}, ${time}`} // Display formatted day and time
-                            />
-                        </ListItem>
-                    );
-                })}
+                {notes.length === 0 ? (
+                    <ListItem sx={{ bgcolor: "#a0d4d4", borderRadius: "15px", my: 2 }}>
+                        <ListItemText primary="No previous notes available" />
+                    </ListItem>
+                ) : (
+                    notes.map((note) => {
+                        const { time } = formatDateTime(note.created);
+                        return (
+                            <ListItem
+                                button
+                                key={note.id}
+                                onClick={() => openModal(note)}
+                                sx={{ bgcolor: "#a0d4d4", borderRadius: "15px", my: 2 }}
+                            >
+                                <ListItemText
+                                    primary={`Date: ${formatDateTime(note.created).date}`}
+                                    secondary={`${formatDateTime(note.created).day}, ${time}`}
+                                />
+                            </ListItem>
+                        );
+                    })
+                )}
             </List>
             <Modal open={modalOpen} onClose={closeModal}>
                 <Box display="flex" flexDirection="column" justifyContent="center" alignItems="flex-start"
@@ -86,7 +88,6 @@ const PreviousNotes = () => {
 
                     }}
                 >
-                    {/* <Typography variant='h4'>Note Details</Typography> */}
                     {selectedNote && (
                         <>
                             <Typography variant='body1' align='left'
@@ -98,16 +99,9 @@ const PreviousNotes = () => {
                                 sx={{
                                     marginLeft: "12px"
                                 }}>Update Date: {selectedNote.updated}</Typography>
-                            <Box
-                                sx={{
-                                    // backgroundColor:"green",
-                                    width: "40vw",
-                                    margin: "15px auto",
-                                    padding: "15px",
-                                    borderRadius: "15px",
-                                }}>
+                            <Box sx={{ width: "40vw", margin: "15px auto", padding: "15px", borderRadius: "15px" }}>
                                 <Typography variant='h4' align='center'>Note</Typography>
-                                <Typography m="2"> {selectedNote.content}</Typography>
+                                <Typography m="2">{selectedNote.content}</Typography>
                             </Box>
                         </>
                     )}
