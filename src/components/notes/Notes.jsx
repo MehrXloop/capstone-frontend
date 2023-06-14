@@ -20,7 +20,7 @@ function Notes() {
       content: content,
 
     }
-    fetch('http://notes.us-west-2.elasticbeanstalk.com/notes/add', {
+    fetch('http://localhost:8086/notes/add', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -94,8 +94,6 @@ function Notes() {
               borderRadius: '15px',
               fontSize: '1.3em',
               textAlign: 'center',
-              // border: '1px solid white',
-              // outline: 'none',
               m: 1,
               '& .MuiOutlinedInput-notchedOutline': {
                 border: 'none',
