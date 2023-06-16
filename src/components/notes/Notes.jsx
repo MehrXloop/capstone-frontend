@@ -3,7 +3,6 @@ import CheckBoxRoundedIcon from '@mui/icons-material/CheckBoxRounded';
 import { Box, Typography, TextareaAutosize, Button, TextField } from '@mui/material'
 import moment from 'moment';
 
-// import { TextareaAutosize } from '@mui/base';
 
 function Notes() {
   const [content, setContent] = useState('');
@@ -85,6 +84,7 @@ function Notes() {
         <TextField
           type="text"
           value="300$"
+          data-testid="cost-textfield"
           InputProps={{
             readOnly: true,
             sx: {

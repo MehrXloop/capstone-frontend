@@ -1,11 +1,10 @@
 import "./App.css";
 import Notes from "./components/notes/Notes";
-import PreviousNotes from "./components/notes/PreviousNotes";
-
+import PreviousNotes from "./components/previousNotes/PreviousNotes"
 function App() {
   return (
     <div className='App'>
-      <PreviousNotes />
+      <PreviousNotes/>
       <Notes />
     </div>
   );
